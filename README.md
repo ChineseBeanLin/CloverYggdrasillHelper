@@ -48,7 +48,7 @@ Uses a custom `ADBShell` wrapper to communicate with Android emulators, handling
 
 This script utilizes a **procedural `while-loop` architecture** to handle game states.
 
-> **Evolution:** In my subsequent projects, this logic was refactored into a **Finite State Machine (FSM)** pattern to handle more complex, non-linear workflows and exception handling (Self-Healing), as seen in my [Visual Automation & RPA Framework](https://github.com/ChineseBeanLin/python-automation-portfolio).
+> **Evolution:** In my subsequent projects, this logic was refactored into a **Finite State Machine (FSM)** pattern to handle more complex, non-linear workflows and exception handling (Self-Healing), as seen in my [Visual Automation & RPA Framework](https://github.com/ChineseBeanLin/python_scraping-automation-tools/tree/main/03_gui_automation_rpa/android_fsm_controller).
 
 ---
 
