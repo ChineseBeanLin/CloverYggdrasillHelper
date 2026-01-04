@@ -1,42 +1,86 @@
-# CloverYggdrasill
-四叶草剧场爬树脚本
+# \# Clover Theater Automation Script (Legacy Prototype)
 
-## 1d10=1 为什么会有这个脚本
-这得问问幼葫怎么想的，爬世界树实在是太煎熬了，于是想着自己写个脚本。
+# 
 
-功能主要就是自动爬世界树
+# > An early-stage Python automation script for the Android game \*Clover Theater\* (四叶草剧场), utilizing ADB, OpenCV, and OCR for autonomous dungeon clearing.
 
-## 1d10=2 运行说明
-只是单纯往上爬，并不考虑神器，神器全部都不捡，战斗结束默认选加1.5%那个，最好在有3星鸽子加2个2星小丑在跑，当然练度够高也成
+# 
 
-需要自己配置的地方：
+# !\[Python](https://img.shields.io/badge/Python-3.x-blue)
 
-config里的baidu_aip_config.py三个参数
+# !\[OpenCV](https://img.shields.io/badge/Computer\_Vision-OpenCV-green)
 
-config.py的ADB_HOST（本身应该把参数搁到配置文件，回头可能会改）
+# !\[Status](https://img.shields.io/badge/Status-Prototype-orange)
 
-adb得加到环境变量里（当然你自己修改ADBshell的内容也成）
+# 
 
-### 关于分辨率和模拟器
-默认用的Mumu，要用其他模拟器看一眼config里面的内容，修改一下就能连进去了
+# \## 📖 Background
 
-ADB用Mumu自带的就成，其他模拟器项目里有个ADB，用那个也行
+# This project represents the \*\*initial prototype\*\* of my research into game automation. It served as the foundation for my later work on \*\*Finite State Machine (FSM)\*\* based agents. While the logic here is procedural, it implements key technologies like \*\*ADB-based control\*\*, \*\*Template Matching\*\*, and \*\*Cloud OCR\*\* for decision making.
 
-要用其他分辨率的话各种BOX的位置估计都得改
+# 
 
-只测试过1440\*810的分辨率（不知道换分辨率还好不好使）
+# \*Note: This repository is archived for educational purposes and demonstrates the evolution of my automation frameworks.\*
 
-### 关于ocr
-事件的判断用的百度的ocr，有些事件标题识别不出来，还是得手动。
+# 
 
-event_opt.json里是遇到事件，默认按照文件的内容选，如果出了新的事件往里面再加就成
+# \## ⚙️ Core Mechanics
 
-（事件的默认选择倾向于无事发生的选项，如果有其他需求可以改下文件的内容）
+# 
 
-## 1d10=3 已知问题
-百度ocr识别不了**”荆棘“**事件，如果碰到**”荆棘“**会直接退出
+# \### 1. Computer Vision Navigation
 
-有时候会识别不到对应的点
+# Instead of relying on fixed coordinates, the script dynamically locates interactive elements (Battle nodes, Elite bosses, Chests) using \*\*OpenCV Template Matching\*\*.
 
-## 1d10=4 ~~碎碎念~~
-代码写的很烂，运行的时候有各种奇怪的错误，没法放着不管，~~不过一般能爬个半层~~
+# \- \*\*Multi-Scale Search:\*\* Implemented `match\_tpl\_loc\_multi` to handle different rendering scales.
+
+# \- \*\*Color Verification:\*\* Combined Grayscale matching with RGB verification to reduce false positives in complex UI environments.
+
+# 
+
+# \### 2. Intelligent Event Handling (OCR)
+
+# The script integrates \*\*Baidu OCR API\*\* to read dynamic text events in the game (e.g., "Unknown Crystal" events).
+
+# \- \*\*Process:\*\* Screenshot -> Text Recognition -> JSON Config Lookup -> Optimal Choice Selection.
+
+# \- This allows the bot to make "smart" decisions rather than random clicking.
+
+# 
+
+# \### 3. ADB Control Wrapper
+
+# Uses a custom `ADBShell` wrapper to communicate with Android emulators, handling touch events, swipes, and screen capturing efficiently.
+
+# 
+
+# \## 🛠️ Tech Stack
+
+# \* \*\*Python 3.x\*\*
+
+# \* \*\*OpenCV (cv2):\*\* Image recognition and template matching.
+
+# \* \*\*ADB (Android Debug Bridge):\*\* Device interaction.
+
+# \* \*\*Baidu OCR API:\*\* Text extraction for event logic.
+
+# \* \*\*NumPy:\*\* Image array processing.
+
+# 
+
+# \## 📂 Project Structure
+
+# ```text
+
+# ├── CloverYggdrasill.py  # Main logic loop (Navigation, Battle, Loot)
+
+# ├── ADBShell.py          # Wrapper for ADB commands (Touch, Swipe, Screencap)
+
+# ├── img\_utils.py         # OpenCV helper functions
+
+# ├── baidu\_ocr.py         # Cloud OCR implementation
+
+# ├── config/              # Configuration files (Templates, Event logic JSON)
+
+# └── res/                 # Image templates for UI matching
+
